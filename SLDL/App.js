@@ -26,60 +26,66 @@ import {
     Lightbox,
 } from 'react-native-router-flux'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-const  reducerCreate = params =>{
-  const  defaultReducer = new Reducer(params);
-  return (state,action) => {
-    return defaultReducer(state,action);
-  };
-};
-const getScrneStyle =()=>({
-   backgroundColor:
-});
+import Home from './app/Home/Home'
+
+import FeiLei from './app/FenLei/FeiLei'
+import Car from './app/Car/Car'
+import Main from './app/Main/Main'
+
+// const  reducerCreate = params =>{
+//   const  defaultReducer = new Reducer(params);
+//   return (state,action) => {
+//     return defaultReducer(state,action);
+//   };
+// };
+const  getScrneStyle =()=>({
+    backgroundColor:'#ff7000'
+})
+// const getScrneStyle =()=>({
+//
+// });
 
 const router = (...props)=>(
-    <Reducer createReducer ={reducerCreate}
-    get/>
+    <Router getSceneStyle={getScrneStyle}>
+        <Modal  hideNavBar>
+            <Scene hideNavBar key="root">
+                <Tabs
+                    key="tabbar"        // 唯一标识
+                    wrap={true}         // 自动使用自己的导航栏包装每个场景
+                    lazy={true}         // 是否默认渲染tabbar
+                    tabBarPosition={'bottom'}       // tabbar在顶部还是底部，iOS默认顶部，安卓默认顶部
+
+                >
+                    <Stack key="Test1"
+                           title={'首页'}
+                    >
+                        <Scene component={Home} key="Test1_key" title="shouye" />
+                    </Stack>
+                    <Stack key="Test2"
+                           title={'分类'}
+                    >
+                        <Scene component={FeiLei} key="Test2_key" title="fenlei" />
+                    </Stack>
+                    <Stack key="Test3"
+                           title={'购物车'}
+                    >
+                        <Scene component={Car} key="Test3_key" title="car" />
+                    </Stack>
+                    <Stack key="Test4"
+                           title={'我的'}
+                    >
+                        <Scene component={Main} key="Test4_key" title="main" />
+                    </Stack>
+                </Tabs>
+            </Scene>
+        </Modal>
+    </Router>
 )
 
-export default class App extends Component<{}> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
-    );
-  }
-}
-
+export default  router;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    tabBarStyle: {
+        backgroundColor: '#eee',
+        height:49,
+    },
 });
