@@ -78,6 +78,16 @@ const router = (...props)=>(
                     </Stack>
                 </Tabs>
             </Scene>
+            <Scene hideNavBar key="Login">
+                <Scene
+                    title='登录'
+                    key="LoginModal"
+                    component={Car}
+                    gesturesEnabled={false}
+                    hideNavBar
+
+                />
+            </Scene>
         </Modal>
     </Router>
 )
